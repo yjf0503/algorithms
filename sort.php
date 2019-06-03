@@ -271,12 +271,12 @@ function heapSort($array) {
     $result = [];
 
     $length = count($array);
-    for ($i = 0; $i < $length; $i++) {
+    for ($i = 1; $i < $length; $i++) {
         $array = buildHeap($array, $i);
     }
 
-    while (count($array) > 1) {
-        $item     = $array[0];
+    while (count($array) >= 1) {
+        $item = $array[0];
         array_push($result, $item);
 
         $array[0] = $array[count($array) - 1];
