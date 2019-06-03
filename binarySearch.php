@@ -46,13 +46,11 @@ function repetitiveBinarySearch($value,$array) {
         } elseif ($array[$middle] < $value) {
             $left = $middle + 1;
         } else {
+            $place = $middle;
 //            //查找第一次出现的位置
-//            $place = $middle;
 //            $right = $middle - 1;
 
-
             //查找最后一次出现的位置
-            $place = $middle;
             $left = $middle + 1;
         }
     }
