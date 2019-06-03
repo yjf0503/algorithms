@@ -318,10 +318,10 @@ function heapify(
     $right  = ($index * 2) + 2;
 
     while ($right < $length) {
-        if ($array[$left] < $array[$right] && $right < $length) {
+        if ($array[$left] < $array[$right]) {
             $minIndex = $left;
         }
-        if ($array[$right] < $array[$left] && $right < $length) {
+        if ($array[$right] < $array[$left]) {
             $minIndex = $right;
         }
 
