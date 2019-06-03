@@ -271,6 +271,11 @@ function heapSort($array) {
     $result = [];
 
     $length = count($array);
+
+    if($length <= 1){
+        return $array;
+    }
+
     for ($i = 1; $i < $length; $i++) {
         $array = buildHeap($array, $i);
     }
@@ -312,7 +317,7 @@ function heapify(
     $left   = ($index * 2) + 1;
     $right  = ($index * 2) + 2;
 
-    while ($left < $length) {
+    while ($right < $length) {
         if ($array[$left] < $array[$right] && $right < $length) {
             $minIndex = $left;
         }
