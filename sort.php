@@ -272,7 +272,7 @@ function heapSort($array) {
 
     $length = count($array);
 
-    if($length <= 1){
+    if ($length <= 1) {
         return $array;
     }
 
@@ -286,7 +286,7 @@ function heapSort($array) {
 
         $array[0] = $array[count($array) - 1];
         unset($array[count($array) - 1]);
-        $array = heapify($array, 0);
+        $array = heapify($array);
     }
 
     return $result;
@@ -309,13 +309,15 @@ function buildHeap(
     return $array;
 }
 
-function heapify(
-    $array,
-    $index
-) {
+function heapify($array) {
     $length = count($array);
-    $left   = ($index * 2) + 1;
-    $right  = ($index * 2) + 2;
+    $father = 0;
+    $left   = 1;
+    $right  = 2;
+
+    if ($length <= 1) {
+        return $array;
+    }
 
     while ($right < $length) {
         if ($array[$left] < $array[$right]) {
@@ -325,21 +327,17 @@ function heapify(
             $minIndex = $right;
         }
 
-        if ($array[$index] < $array[$minIndex]) {
-            $minIndex = $index;
+        if ($array[$father] < $array[$minIndex]) {
+            $minIndex = $father;
         }
 
-        if ($index == $minIndex) {
-            break;
-        }
-
-        $temp             = $array[$index];
-        $array[$index]    = $array[$minIndex];
+        $temp             = $array[$father];
+        $array[$father]   = $array[$minIndex];
         $array[$minIndex] = $temp;
 
-        $index = $minIndex;
-        $left  = ($index * 2) + 1;
-        $right = ($index * 2) + 2;
+        $father = $minIndex;
+        $left   = ($father * 2) + 1;
+        $right  = ($father * 2) + 2;
     }
     return $array;
 }
