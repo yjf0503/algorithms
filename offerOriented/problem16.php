@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Desc: 查找链表倒数第n个节点
+ * Desc: 反转链表
  * User: jiefuyang
  * Date: 2019-06-13
  * Time: 10:51
@@ -100,41 +100,25 @@ function deleteNode(
     }
 }
 
-function findNode(
-    $head,
-    $nodeIndex
-) {
-    $length = 0;
-    $next   = $head;
-
-    if ($head == null || $nodeIndex == null || $nodeIndex <= 0) {
+function reverseList($head) {
+    if($head == null){
         return false;
     }
-
-    $firstIndex  = 0;
-    $secondIndex = 0;
-
-    while ($next != null) {
-        $next = $next->next;
-        $length++;
-        $firstIndex++;
-
-        if ($firstIndex > $nodeIndex - 1) {
-            $secondIndex++;
-        }
+    if($head->next == null){
+        return $head;
     }
 
-    if($nodeIndex > $length){
-        return false;
-    }
+    $prevNode       = $head;
+    $currentNode    = $prevNode->next;
+    $prevNode->next = null;
 
-    $node = $head;
-    if ($secondIndex > 0) {
-        for ($i = 1; $i < $secondIndex; $i++) {
-            $node = $node->next;
-        }
+    while ($currentNode != null) {
+        $nextNode          = $currentNode->next;
+        $currentNode->next = $prevNode;
+        $prevNode          = $currentNode;
+        $currentNode       = $nextNode;
     }
-    return $node;
+    return $prevNode;
 }
 
 $head = new Node('a');// 定义头节点
@@ -145,4 +129,4 @@ addNode($head, $b);
 addNode($head, $c);
 addNode($head, $d);
 
-var_dump(findNode($head, 4));
+var_dump(reverseList($head));
