@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Desc: 反转链表
+ * Desc: 合并链表
  * User: jiefuyang
- * Date: 2019-06-13
+ * Date: 2019-06-14
  * Time: 10:51
  */
 
@@ -93,40 +93,52 @@ function deleteNode(
         $lastNode->next = null;
     } else {
         //删除头节点或中间节点，做法是将next节点复制到该节点，并删除next节点
-        $nextNode    = $pNode->next;
+        $nextNode = $pNode->next;
         $pNode->data = $nextNode->data;
         $pNode->next = $nextNode->next;
         unset($nextNode);
     }
 }
 
-function reverseList($head) {
-    if ($head == null) {
-        return false;
+function mergeLists(
+    $head1,
+    $head2
+) {
+    if ($head1 == null) {
+        return $head2;
     }
-    if ($head->next == null) {
-        return $head;
+    if ($head2 == null) {
+        return $head1;
     }
 
-    $prevNode       = $head;
-    $currentNode    = $prevNode->next;
-    $prevNode->next = null;
-
-    while ($currentNode != null) {
-        $nextNode          = $currentNode->next;
-        $currentNode->next = $prevNode;
-        $prevNode          = $currentNode;
-        $currentNode       = $nextNode;
+    $newHead = new Node('');
+    if ($head1->data < $head2->data) {
+        $newHead->data = $head1->data;
+        $newHead->next = mergeLists($head1->next, $head2);
     }
-    return $prevNode;
+
+    if ($head2->data < $head1->data) {
+        $newHead->data = $head2->data;
+        $newHead->next = mergeLists($head1, $head2->next);
+    }
+
+    return $newHead;
 }
 
-$head = new Node('a');// 定义头节点
-$b    = new Node('b');
-$c    = new Node('c');
-$d    = new Node('d');
-addNode($head, $b);
-addNode($head, $c);
-addNode($head, $d);
+$head1 = new Node('1');// 定义头节点
+$a     = new Node('3');
+$b     = new Node('5');
+$c     = new Node('7');
+addNode($head1, $a);
+addNode($head1, $b);
+addNode($head1, $c);
 
-var_dump(reverseList($head));
+$head2 = new Node('2');// 定义头节点
+$d     = new Node('4');
+$e     = new Node('6');
+$f     = new Node('8');
+addNode($head2, $d);
+addNode($head2, $e);
+addNode($head2, $f);
+
+var_dump(mergeLists($head1, $head2));

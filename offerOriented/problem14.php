@@ -1,5 +1,16 @@
 <?php
-function reorderOddEven($array,$func) {
+
+/**
+ * Desc: 数组按奇数偶数排列
+ * User: jiefuyang
+ * Date: 2019-06-13
+ * Time: 10:51
+ */
+
+function reorderOddEven(
+    $array,
+    $func
+) {
     $length     = count($array);
     $startIndex = 0;
     $endIndex   = $length - 1;
@@ -22,8 +33,8 @@ function reorderOddEven($array,$func) {
     return $array;
 }
 
-function checkEven($data){
-    if($data % 2 == 0){
+function checkEven($data) {
+    if ($data % 2 == 0) {
         return true;
     }
     return false;
@@ -41,4 +52,4 @@ $array = [
     33,
     92
 ];
-print_r(reorderOddEven($array,'checkEven'));
+print_r(reorderOddEven($array, 'checkEven'));

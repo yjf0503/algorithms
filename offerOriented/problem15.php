@@ -124,7 +124,7 @@ function findNode(
         }
     }
 
-    if($nodeIndex > $length){
+    if ($nodeIndex > $length) {
         return false;
     }
 
